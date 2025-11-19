@@ -1,0 +1,99 @@
+{
+  "templates": [
+    {
+      "id": "basic",
+      "name": "Basic Free",
+      "description": "Clean and simple FlexCard design",
+      "price": 0,
+      "animated": false,
+      "premium": false,
+      "features": [
+        "High quality PNG export",
+        "Custom colors",
+        "Farcaster stats",
+        "Transaction count"
+      ],
+      "preview": "/templates/basic-preview.png"
+    },
+    {
+      "id": "premium",
+      "name": "Premium Static",
+      "description": "Premium design with glass effects and glow",
+      "price": 0.5,
+      "animated": false,
+      "premium": true,
+      "features": [
+        "Glass morphism effects",
+        "Gradient borders",
+        "Premium badge",
+        "Enhanced typography",
+        "All basic features"
+      ],
+      "preview": "/templates/premium-preview.png"
+    },
+    {
+      "id": "animated",
+      "name": "Premium Animated",
+      "description": "Animated FlexCard with motion effects",
+      "price": 1.0,
+      "animated": true,
+      "premium": true,
+      "features": [
+        "Animated GIF export",
+        "Particle effects",
+        "Floating animations",
+        "Dynamic gradients",
+        "All premium features"
+      ],
+      "preview": "/templates/animated-preview.gif"
+    }
+  ],
+  "metadata_examples": [
+    {
+      "template": "basic",
+      "example": {
+        "name": "FlexCard #123",
+        "description": "Basic FlexCard showing Farcaster stats and onchain activity",
+        "image": "ipfs://QmBasicFlexCard123/image.png",
+        "attributes": [
+          { "trait_type": "Template", "value": "Basic Free" },
+          { "trait_type": "Handle", "value": "flexer" },
+          { "trait_type": "FarcasterScore", "value": 84 },
+          { "trait_type": "TransactionCount", "value": 1337 }
+        ]
+      }
+    },
+    {
+      "template": "premium",
+      "example": {
+        "name": "FlexCard #456",
+        "description": "Premium FlexCard with glass effects and enhanced design",
+        "image": "ipfs://QmPremiumFlexCard456/image.png",
+        "attributes": [
+          { "trait_type": "Template", "value": "Premium Static" },
+          { "trait_type": "Handle", "value": "premiumflex" },
+          { "trait_type": "FarcasterScore", "value": 92 },
+          { "trait_type": "TransactionCount", "value": 2500 },
+          { "trait_type": "Rarity", "value": "Premium" }
+        ]
+      }
+    },
+    {
+      "template": "animated",
+      "example": {
+        "name": "FlexCard #789",
+        "description": "Animated FlexCard with motion effects and premium features",
+        "image": "ipfs://QmAnimatedFlexCard789/image.png",
+        "animation_url": "ipfs://QmAnimatedFlexCard789/animation.gif",
+        "attributes": [
+          { "trait_type": "Template", "value": "Premium Animated" },
+          { "trait_type": "Handle", "value": "animatedflex" },
+          { "trait_type": "FarcasterScore", "value": 98 },
+          { "trait_type": "TransactionCount", "value": 5000 },
+          { "trait_type": "Rarity", "value": "Animated" },
+          { "trait_type": "Effects", "value": "Particle Animation" }
+        ]
+      }
+    }
+  ]
+}

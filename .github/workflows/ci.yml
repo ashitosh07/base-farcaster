@@ -1,0 +1,129 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-contracts:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: contracts/package-lock.json
+    
+    - name: Install contract dependencies
+      run: |
+        cd contracts
+        npm ci
+    
+    - name: Compile contracts
+      run: |
+        cd contracts
+        npx hardhat compile
+    
+    - name: Run contract tests
+      run: |
+        cd contracts
+        npx hardhat test
+
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: |
+        cd backend
+        dotnet restore
+    
+    - name: Build
+      run: |
+        cd backend
+        dotnet build --no-restore
+    
+    - name: Test
+      run: |
+        cd backend
+        dotnet test --no-build --verbosity normal
+
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm ci
+    
+    - name: Build frontend
+      run: |
+        cd frontend
+        npm run build
+      env:
+        NEXT_PUBLIC_CONTRACT_ADDRESS: "0x0000000000000000000000000000000000000000"
+        NEXT_PUBLIC_BACKEND_URL: "http://localhost:5000"
+
+  deploy-contracts:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [test-contracts]
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: contracts/package-lock.json
+    
+    - name: Install dependencies
+      run: |
+        cd contracts
+        npm ci
+    
+    - name: Deploy to Base Sepolia
+      run: |
+        cd contracts
+        npx hardhat run scripts/deploy.js --network baseSepolia
+      env:
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        BASE_SEPOLIA_RPC: ${{ secrets.BASE_SEPOLIA_RPC }}
+
+  deploy-frontend:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [test-frontend]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Deploy to Vercel
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        working-directory: ./frontend
+        vercel-args: '--prod'
