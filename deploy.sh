@@ -1,0 +1,41 @@
+#!/bin/bash
+
+echo "🚀 FlexCard Production Deployment"
+echo "================================="
+
+# Step 1: Railway Backend Deployment
+echo "📦 Deploying Backend to Railway..."
+echo "1. Go to https://railway.app"
+echo "2. Click 'Start a New Project'"
+echo "3. Select 'Deploy from GitHub repo'"
+echo "4. Choose your base-farcaster repository"
+echo "5. Set these environment variables:"
+echo "   CONTRACT_ADDRESS=<YOUR_MAINNET_CONTRACT>"
+echo "   BASE_RPC=https://mainnet.base.org"
+echo "   RELAYER_PRIVATE_KEY=<YOUR_MAINNET_RELAYER_KEY>"
+echo "   NFT_STORAGE_KEY=<YOUR_KEY>"
+echo "   PINATA_KEY=<YOUR_KEY>"
+echo "   PINATA_SECRET=<YOUR_SECRET>"
+echo "   API_KEY_ADMIN=<SECURE_ADMIN_KEY>"
+echo ""
+
+# Step 2: Vercel Frontend Deployment  
+echo "🌐 Deploying Frontend to Vercel..."
+echo "1. Go to https://vercel.com"
+echo "2. Click 'Add New Project'"
+echo "3. Import your GitHub repository"
+echo "4. Set Root Directory to: frontend-vite"
+echo "5. Set these environment variables:"
+echo "   VITE_API_URL=<YOUR_RAILWAY_URL>"
+echo "   VITE_CONTRACT_ADDRESS=<YOUR_MAINNET_CONTRACT>"
+echo "   VITE_CHAIN_ID=8453"
+echo "   VITE_RPC_URL=https://mainnet.base.org"
+echo ""
+
+echo "✅ Deployment files ready!"
+echo "📋 Next steps:"
+echo "1. Deploy contract to mainnet first"
+echo "2. Follow Railway deployment steps above"
+echo "3. Follow Vercel deployment steps above"
+echo "4. Add minter role to relayer"
+echo "5. Test production app"

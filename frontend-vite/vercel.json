@@ -1,0 +1,32 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev",
+  "env": {
+    "VITE_API_URL": "@vite_api_url",
+    "VITE_CONTRACT_ADDRESS": "@vite_contract_address", 
+    "VITE_CHAIN_ID": "8453",
+    "VITE_RPC_URL": "https://mainnet.base.org"
+  },
+  "build": {
+    "env": {
+      "VITE_API_URL": "@vite_api_url",
+      "VITE_CONTRACT_ADDRESS": "@vite_contract_address",
+      "VITE_CHAIN_ID": "8453", 
+      "VITE_RPC_URL": "https://mainnet.base.org"
+    }
+  },
+  "functions": {
+    "app/api/**/*.js": {
+      "runtime": "@vercel/node"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
