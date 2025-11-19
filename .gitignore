@@ -124,3 +124,4 @@ deployment.json
 
 # Local development
 .vercel
+/backend/.vs/FlexCard.API/FileContentIndex
