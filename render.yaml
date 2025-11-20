@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: flexcard-api
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: singapore
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://+:10000
+      - key: CONTRACT_ADDRESS
+        sync: false
+      - key: BASE_RPC
+        value: https://mainnet.base.org
+      - key: RELAYER_PRIVATE_KEY
+        sync: false
+      - key: NFT_STORAGE_KEY
+        sync: false
+      - key: PINATA_KEY
+        sync: false
+      - key: PINATA_SECRET
+        sync: false
+      - key: API_KEY_ADMIN
+        sync: false
