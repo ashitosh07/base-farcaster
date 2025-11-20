@@ -90,7 +90,7 @@ export const generateCardImage = async (cardData: CardData): Promise<string> => 
   return canvas.toDataURL('image/png');
 };
 
-export const generateCardFromElement = async (element: HTMLElement): Promise<string> => {
+export const generateCardFromElement = async (_element: HTMLElement): Promise<string> => {
   // Fallback implementation without html2canvas
   // In production, install html2canvas: npm install html2canvas
   console.warn('html2canvas not available, using fallback');
