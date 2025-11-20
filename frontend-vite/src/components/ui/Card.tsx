@@ -2,7 +2,7 @@ import { type HTMLAttributes, forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
-interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onDrag'> {
+interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop'> {
   variant?: 'default' | 'elevated' | 'outlined' | 'glass';
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
   hover?: boolean;
