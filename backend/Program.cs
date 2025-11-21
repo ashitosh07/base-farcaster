@@ -39,6 +39,7 @@ builder.Services.AddCors(options =>
         policy.WithOrigins(
                 "http://localhost:5173", // Vite dev server
                 "https://flexcard.vercel.app", // Production frontend
+                "https://base-farcaster.vercel.app", // Production frontend
                 "https://*.vercel.app" // Vercel preview deployments
               )
               .AllowAnyMethod()
