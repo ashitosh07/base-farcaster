@@ -1,0 +1,17 @@
+{
+  "name": "FlexCard",
+  "description": "Create personalized Farcaster FlexCards and mint them as premium NFTs on Base",
+  "website": "https://base-farcaster.vercel.app",
+  "category": "NFT",
+  "tags": ["NFT", "Farcaster", "Social", "Creator Tools"],
+  "logo": "https://base-farcaster.vercel.app/logo.png",
+  "contracts": {
+    "base_sepolia": {
+      "FlexCard": "0x5C78f1422FEB39af04958375e43A62Fd6c395Cfc"
+    }
+  },
+  "social": {
+    "farcaster": "@flexcard",
+    "twitter": "@flexcard_app"
+  }
+}
