@@ -36,15 +36,24 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins(
-                "http://localhost:5173", // Vite dev server
-                "https://flexcard.vercel.app", // Production frontend
-                "https://base-farcaster.vercel.app", // Production frontend
-                "https://*.vercel.app" // Vercel preview deployments
-              )
-              .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();
+        if (builder.Environment.IsDevelopment())
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        }
+        else
+        {
+            policy.WithOrigins(
+                    "http://localhost:5173", // Vite dev server
+                    "https://flexcard.vercel.app", // Production frontend
+                    "https://base-farcaster.vercel.app", // Production frontend
+                    "https://base-farcaster-git-main-ashitosh07s-projects.vercel.app" // Git branch deployments
+                  )
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials();
+        }
     });
 });
 
