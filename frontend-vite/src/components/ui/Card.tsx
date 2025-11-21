@@ -1,8 +1,8 @@
 import { type HTMLAttributes, forwardRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
-interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop'> {
+interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onAnimationStart' | 'onAnimationEnd' | 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop'> {
   variant?: 'default' | 'elevated' | 'outlined' | 'glass';
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
   hover?: boolean;
@@ -27,21 +27,28 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       xl: 'p-10'
     };
 
-    const Component = hover ? motion.div : 'div';
-    const motionProps = hover ? {
-      whileHover: { y: -2, scale: 1.01 },
-      transition: { duration: 0.2 }
-    } : {};
+    if (hover) {
+      return (
+        <motion.div
+          ref={ref}
+          className={cn(baseClasses, variants[variant], paddings[padding], className)}
+          whileHover={{ y: -2, scale: 1.01 }}
+          transition={{ duration: 0.2 }}
+          {...(props as HTMLMotionProps<'div'>)}
+        >
+          {children}
+        </motion.div>
+      );
+    }
 
     return (
-      <Component
+      <div
         ref={ref}
         className={cn(baseClasses, variants[variant], paddings[padding], className)}
-        {...motionProps}
         {...props}
       >
         {children}
-      </Component>
+      </div>
     );
   }
 );

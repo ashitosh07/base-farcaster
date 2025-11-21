@@ -34,14 +34,13 @@ function AppContent() {
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
   const [generatedImage, setGeneratedImage] = useState<string>('');
   const [cardData, setCardData] = useState<CardData | null>(null);
-  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     loadInitialData();
   }, []);
 
   const loadInitialData = async () => {
-    setLoading(true);
     try {
       const [statsData, templatesData] = await Promise.all([
         apiClient.getStats(),
@@ -51,8 +50,6 @@ function AppContent() {
       setTemplates(templatesData);
     } catch (error) {
       console.error('Failed to load initial data:', error);
-    } finally {
-      setLoading(false);
     }
   };
 

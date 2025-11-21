@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
 import { Upload, Palette, Type, User } from 'lucide-react';
 import Button from './ui/Button';
 import Card from './ui/Card';
