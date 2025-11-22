@@ -1,8 +1,8 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const contractAddress = "0x5C78f1422FEB39af04958375e43A62Fd6c395Cfc";
-  const relayerAddress = ethers.getAddress("0x8a547Feb8B9AC2a7F137a0aBab94da6051aFAdF6");
+  const contractAddress = process.env.CONTRACT_ADDRESS || "0x5C78f1422FEB39af04958375e43A62Fd6c395Cfc";
+  const relayerAddress = process.env.RELAYER_ADDRESS || "0x742d35Cc6634C0532925a3b8D6Ac6E7D9C8b5c6f";
   
   console.log("Adding minter role...");
   console.log("Contract:", contractAddress);
@@ -10,10 +10,10 @@ async function main() {
   
   const FlexCard = await ethers.getContractAt("FlexCard", contractAddress);
   
-  // Check if already has minter role
-  const hasMinterRole = await FlexCard.minters(relayerAddress);
-  if (hasMinterRole) {
-    console.log("✅ Relayer already has minter role");
+  // Check if already minter
+  const isMinter = await FlexCard.isMinter(relayerAddress);
+  if (isMinter) {
+    console.log("✅ Already has minter role");
     return;
   }
   
@@ -25,8 +25,8 @@ async function main() {
   console.log("✅ Minter role granted successfully");
   
   // Verify
-  const hasRole = await FlexCard.minters(relayerAddress);
-  console.log("Verification - Has minter role:", hasRole);
+  const isNowMinter = await FlexCard.isMinter(relayerAddress);
+  console.log("Verification:", isNowMinter ? "✅ Success" : "❌ Failed");
 }
 
 main()

@@ -1,107 +1,106 @@
-# 🚀 Production Deployment Guide
+# FlexCard Production Deployment Guide (Base Sepolia)
 
-## Prerequisites
-- Base mainnet ETH (at least 0.01 ETH for deployment)
-- Railway account
-- Vercel account
-- Production API keys (nft.storage, Pinata)
+## 1. Use Existing Contract on Base Sepolia
 
-## 1. Deploy Smart Contract to Base Mainnet
+### Current Contract
+- **Address**: `0x5C78f1422FEB39af04958375e43A62Fd6c395Cfc`
+- **Network**: Base Sepolia (Chain ID: 84532)
+- **Explorer**: https://sepolia.basescan.org/address/0x5C78f1422FEB39af04958375e43A62Fd6c395Cfc
 
+### Verify Minter Role
 ```bash
 cd contracts
+# Check if relayer has minter role
+npx hardhat run scripts/addMinter.js --network baseSepolia
+```
 
-# Update .env with mainnet keys
-echo "BASE_RPC=https://mainnet.base.org" >> .env
-echo "PRIVATE_KEY=0x..." >> .env  # Your mainnet deployer key
-echo "ETHERSCAN_API_KEY=..." >> .env
-
-# Deploy to Base mainnet
-npx hardhat run scripts/deployMainnet.js --network base
-
-# Verify contract (use address from deployment output)
-npx hardhat verify --network base <CONTRACT_ADDRESS> "FlexCard" "FLEX"
+### Configure Minter Role
+```bash
+# Add relayer as minter (use production relayer address)
+npx hardhat run scripts/addMinter.js --network base
 ```
 
 ## 2. Deploy Backend to Railway
 
+### Environment Variables
 ```bash
-cd backend
-
-# Install Railway CLI
-npm install -g @railway/cli
-
-# Login and create project
-railway login
-railway init
-railway link
-
-# Set environment variables
-railway variables set CONTRACT_ADDRESS=<MAINNET_CONTRACT_ADDRESS>
-railway variables set BASE_RPC=https://mainnet.base.org
-railway variables set RELAYER_PRIVATE_KEY=<MAINNET_RELAYER_KEY>
-railway variables set NFT_STORAGE_KEY=<YOUR_KEY>
-railway variables set PINATA_KEY=<YOUR_KEY>
-railway variables set PINATA_SECRET=<YOUR_SECRET>
-railway variables set API_KEY_ADMIN=<SECURE_ADMIN_KEY>
-
-# Deploy
-railway up
+CONTRACT_ADDRESS=0x5C78f1422FEB39af04958375e43A62Fd6c395Cfc
+BASE_RPC=https://sepolia.base.org
+RELAYER_PRIVATE_KEY=0x...                # Production relayer key
+NFT_STORAGE_KEY=...                      # Production API key
+PINATA_KEY=...                           # Production API key
+PINATA_SECRET=...                        # Production secret
+API_KEY_ADMIN=...                        # Strong admin key
+DATABASE_URL=postgresql://...            # PostgreSQL connection
 ```
 
-## 3. Add Minter Role
+### Deploy Steps
+1. Push to GitHub
+2. Connect Railway to GitHub repo
+3. Set environment variables in Railway dashboard
+4. Deploy automatically
 
+## 3. Deploy Frontend to Vercel
+
+### Environment Variables
 ```bash
-cd contracts
-
-# Create script to add mainnet relayer as minter
-# Update addMinter.js with your mainnet relayer address
-npx hardhat run scripts/addMinter.js --network base
+VITE_API_URL=https://your-railway-app.railway.app
+VITE_CONTRACT_ADDRESS=0x5C78f1422FEB39af04958375e43A62Fd6c395Cfc
+VITE_CHAIN_ID=84532                      # Base Sepolia
+VITE_RPC_URL=https://sepolia.base.org
 ```
 
-## 4. Deploy Frontend to Vercel
-
+### Deploy Steps
 ```bash
 cd frontend-vite
 
-# Update .env.production with your deployed backend URL
-# VITE_API_URL=https://your-railway-app.railway.app
-# VITE_CONTRACT_ADDRESS=<MAINNET_CONTRACT_ADDRESS>
-
-# Install Vercel CLI
-npm install -g vercel
-
-# Deploy
-vercel --prod
+# Build and deploy
+npm run build
+npx vercel --prod
 ```
 
-## 5. Test Production Deployment
+## 4. Update CORS Origins
 
-1. Visit your Vercel URL
-2. Connect wallet to Base mainnet
-3. Try minting a FlexCard
+Update backend CORS to include production domains:
+```csharp
+policy.WithOrigins(
+    "https://your-domain.vercel.app",
+    "https://flexcard.app"
+)
+```
+
+## 5. Test Production Flow
+
+1. Connect wallet to Base Sepolia
+2. Get testnet ETH from [Base Sepolia Faucet](https://www.coinbase.com/faucets/base-ethereum-sepolia-faucet)
+3. Test minting with testnet ETH
 4. Verify NFT appears in wallet
 5. Test Farcaster sharing
+6. Check admin dashboard
 
-## 6. Submit to Base Ecosystem
+## 6. Domain Setup (Optional)
 
-Visit [Base Ecosystem](https://base.org/ecosystem) and submit:
-- App name: FlexCard
-- URL: Your Vercel deployment
-- Description: "Mint personalized NFT cards on Base"
-- Contract: Your mainnet contract address
+### Custom Domain
+1. Buy domain (flexcard.app)
+2. Point to Vercel deployment
+3. Update CORS origins
+4. Update share links
 
-## Security Checklist
+## Production Checklist
 
-- ✅ Use dedicated relayer key (not owner key)
-- ✅ Store private keys securely
-- ✅ Enable rate limiting
-- ✅ Monitor contract for unusual activity
-- ✅ Set up alerts for failed transactions
+- [x] Contract deployed to Base Sepolia
+- [ ] Minter role configured
+- [ ] Backend deployed with production env vars
+- [ ] Frontend deployed with Sepolia config
+- [ ] CORS updated for production domains
+- [ ] End-to-end testing completed
+- [ ] Admin dashboard accessible
+- [ ] Monitoring setup
 
-## Monitoring
+## Future Migration to Base Mainnet
 
-- Railway dashboard for backend metrics
-- Vercel analytics for frontend usage
-- Basescan for contract transactions
-- Set up Discord/Slack alerts for errors
+When you have mainnet ETH:
+1. Deploy contract to Base mainnet
+2. Update environment variables
+3. Redeploy frontend/backend
+4. Users can mint on mainnet
