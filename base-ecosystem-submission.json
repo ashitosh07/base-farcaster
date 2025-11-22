@@ -1,0 +1,42 @@
+{
+  "name": "FlexCard",
+  "slug": "flexcard",
+  "short_description": "Create personalized Farcaster profile cards and mint them as NFTs on Base.",
+  "description": "FlexCard is a Web3 social application that lets users create beautiful, personalized Farcaster profile cards and mint them as ERC-721 NFTs on Base. Users can customize their cards with their Farcaster handle, stats, colors, and avatar, then mint and share directly on Farcaster. Built with Base for fast, cheap minting and seamless social integration.",
+  "category": "Social / NFTs",
+  "tags": ["nft", "farcaster", "social", "base", "erc721", "profile", "cards"],
+  "website": "https://base-farcaster.vercel.app",
+  "repo": "https://github.com/ashitosh07/base-farcaster",
+  "logo": "https://base-farcaster.vercel.app/logo.png",
+  "contact": {
+    "name": "Ashitosh",
+    "email": "ashitosh@example.com",
+    "twitter": "https://twitter.com/ashitosh07",
+    "farcaster": "ashitosh"
+  },
+  "contracts": [
+    {
+      "network": "base-sepolia",
+      "address": "0x5C78f1422FEB39af04958375e43A62Fd6c395Cfc",
+      "description": "ERC-721 FlexCard contract for minting personalized Farcaster profile cards."
+    }
+  ],
+  "demo": {
+    "url": "https://base-farcaster.vercel.app",
+    "notes": "Connect wallet to Base Sepolia, enter your Farcaster handle, customize your card, and mint as NFT. Get testnet ETH from Base faucet."
+  },
+  "screenshots": [
+    "https://base-farcaster.vercel.app/screenshots/home.png",
+    "https://base-farcaster.vercel.app/screenshots/editor.png",
+    "https://base-farcaster.vercel.app/screenshots/mint.png"
+  ],
+  "license": "MIT",
+  "created_at": "2025-01-27",
+  "maintainers": [
+    {
+      "name": "Ashitosh",
+      "email": "ashitosh@example.com",
+      "github": "ashitosh07"
+    }
+  ]
+}
