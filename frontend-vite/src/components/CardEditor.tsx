@@ -25,6 +25,7 @@ export default function CardEditor({ template, onPreviewGenerated }: CardEditorP
   });
 
   const [isGenerating, setIsGenerating] = useState(false);
+  const [previewImage, setPreviewImage] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleAvatarUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,11 +50,14 @@ export default function CardEditor({ template, onPreviewGenerated }: CardEditorP
 
     setIsGenerating(true);
     try {
+      console.log('Generating preview for:', cardData);
       const imageData = await generateCardImage(cardData);
+      console.log('Generated image data length:', imageData.length);
+      setPreviewImage(imageData);
       onPreviewGenerated(imageData, cardData);
     } catch (error) {
       console.error('Failed to generate preview:', error);
-      alert('Failed to generate preview');
+      alert('Failed to generate preview: ' + error.message);
     } finally {
       setIsGenerating(false);
     }
@@ -200,10 +204,27 @@ export default function CardEditor({ template, onPreviewGenerated }: CardEditorP
         {/* Preview Panel */}
         <Card className="p-6">
           <h3 className="text-xl font-bold mb-6">Preview</h3>
-          <div className="bg-gray-100 rounded-lg p-8 text-center">
-            <p className="text-gray-500">
-              Fill in your details and click "Generate Preview" to see your FlexCard
-            </p>
+          <div className="bg-gray-100 rounded-lg p-4 text-center min-h-[300px] flex items-center justify-center">
+            {isGenerating ? (
+              <div className="text-blue-500">
+                <div className="animate-spin w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full mx-auto mb-2"></div>
+                <p>Generating your FlexCard...</p>
+              </div>
+            ) : previewImage ? (
+              <div className="w-full">
+                <img 
+                  src={previewImage} 
+                  alt="FlexCard Preview" 
+                  className="max-w-full h-auto rounded-lg shadow-lg mx-auto"
+                  style={{ maxHeight: '400px' }}
+                />
+                <p className="text-sm text-gray-600 mt-2">Your FlexCard is ready to mint!</p>
+              </div>
+            ) : (
+              <p className="text-gray-500">
+                Fill in your details and click "Generate Preview" to see your FlexCard
+              </p>
+            )}
           </div>
         </Card>
       </div>

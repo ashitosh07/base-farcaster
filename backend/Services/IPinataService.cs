@@ -7,6 +7,7 @@ namespace FlexCard.API.Services;
 public interface IPinataService
 {
     Task<PinResponse> PinToIPFS(string imageData, object metadata);
+    Task<UploadResponse> UploadFile(Stream fileStream, string fileName);
 }
 
 public class PinataService : IPinataService
@@ -99,6 +100,30 @@ public class PinataService : IPinataService
         catch (Exception ex)
         {
             throw new Exception($"Failed to pin to Pinata: {ex.Message}");
+        }
+    }
+
+    public async Task<UploadResponse> UploadFile(Stream fileStream, string fileName)
+    {
+        try
+        {
+            using var content = new MultipartFormDataContent();
+            using var streamContent = new StreamContent(fileStream);
+            streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/png");
+            content.Add(streamContent, "file", fileName);
+            
+            var response = await _httpClient.PostAsync("https://api.pinata.cloud/pinning/pinFileToIPFS", content);
+            response.EnsureSuccessStatusCode();
+            
+            var result = await response.Content.ReadAsStringAsync();
+            var json = JsonDocument.Parse(result);
+            var ipfsHash = json.RootElement.GetProperty("IpfsHash").GetString();
+
+            return new UploadResponse { IpfsHash = ipfsHash! };
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Failed to upload file to Pinata: {ex.Message}");
         }
     }
 }

@@ -28,3 +28,8 @@ public class RelayResponse
 {
     public string TxHash { get; set; } = "";
 }
+
+public class UploadResponse
+{
+    public string IpfsHash { get; set; } = "";
+}

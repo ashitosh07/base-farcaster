@@ -22,6 +22,7 @@ export default function MintFlow({ imageData, cardData, templatePrice, onComplet
   const [txHash, setTxHash] = useState<string>('');
   const [tokenId, setTokenId] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [isSharing, setIsSharing] = useState(false);
 
   const startMinting = async () => {
     if (!address) {
@@ -73,10 +74,23 @@ export default function MintFlow({ imageData, cardData, templatePrice, onComplet
     }
   };
 
-  const shareToFarcaster = () => {
-    const text = `Just minted my FlexCard NFT! 🎨✨\n\n@${cardData.handle} | ${cardData.tagline}\n\nMint yours at flexcard.app`;
-    const url = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}`;
-    window.open(url, '_blank');
+  const shareToFarcaster = async () => {
+    setIsSharing(true);
+    try {
+      // Upload image to get public URL
+      const response = await apiClient.uploadTempImage({ image: imageData });
+      
+      const text = `Just minted my FlexCard NFT! 🎨✨\n\n@${cardData.handle}\nToken #${tokenId}\n\nMint yours at flexcard.app`;
+      const url = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}&embeds[]=${encodeURIComponent(response.imageUrl)}`;
+      window.open(url, '_blank');
+    } catch (error) {
+      // Fallback without image
+      const text = `Just minted my FlexCard NFT! 🎨✨\n\n@${cardData.handle}\nToken #${tokenId}\n\nMint yours at flexcard.app`;
+      const url = `https://warpcast.com/~/compose?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    } finally {
+      setIsSharing(false);
+    }
   };
 
   const getStepContent = () => {
@@ -135,6 +149,10 @@ export default function MintFlow({ imageData, cardData, templatePrice, onComplet
               <p className="text-gray-600">Your FlexCard NFT has been minted</p>
             </div>
 
+            <div className="bg-gray-100 rounded-lg p-4 mb-4">
+              <img src={imageData} alt="Your FlexCard" className="mx-auto rounded-lg shadow-lg max-w-full h-auto" style={{ maxHeight: '300px' }} />
+            </div>
+
             <div className="bg-gray-50 rounded-lg p-4 space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">Token ID:</span>
@@ -154,9 +172,9 @@ export default function MintFlow({ imageData, cardData, templatePrice, onComplet
             </div>
 
             <div className="flex space-x-3">
-              <Button onClick={shareToFarcaster} variant="outline" className="flex-1">
-                <Share2 className="w-4 h-4 mr-2" />
-                Share on Farcaster
+              <Button onClick={shareToFarcaster} variant="outline" className="flex-1" disabled={isSharing}>
+                {isSharing ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Share2 className="w-4 h-4 mr-2" />}
+                {isSharing ? 'Uploading...' : 'Share on Farcaster'}
               </Button>
               <Button onClick={onComplete} className="flex-1">
                 Create Another

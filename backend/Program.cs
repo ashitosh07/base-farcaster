@@ -241,6 +241,36 @@ app.MapGet("/api/templates", () =>
 .WithSummary("Get available templates")
 .WithTags("Templates");
 
+app.MapPost("/api/upload-temp-image", async (TempImageRequest request, IPinataService pinataService) =>
+{
+    try
+    {
+        // Upload image to Pinata for temporary sharing
+        var imageBytes = Convert.FromBase64String(request.Image.Split(',')[1]);
+        var fileName = $"flexcard-share-{Guid.NewGuid()}.png";
+        
+        using var stream = new MemoryStream(imageBytes);
+        var result = await pinataService.UploadFile(stream, fileName);
+        
+        return Results.Ok(new ApiResponse<object>
+        {
+            Success = true,
+            Data = new { imageUrl = $"https://gateway.pinata.cloud/ipfs/{result.IpfsHash}" }
+        });
+    }
+    catch (Exception ex)
+    {
+        return Results.BadRequest(new ApiResponse<object>
+        {
+            Success = false,
+            Error = new ApiError { Code = "UPLOAD_FAILED", Message = ex.Message }
+        });
+    }
+})
+.WithName("UploadTempImage")
+.WithSummary("Upload temporary image for sharing")
+.WithTags("Sharing");
+
 app.MapGet("/api/admin/mints", async (FlexCardContext context, HttpContext httpContext) =>
 {
     var apiKey = httpContext.Request.Headers["Authorization"].FirstOrDefault()?.Replace("Bearer ", "");
@@ -280,6 +310,7 @@ app.Run();
 public record PinRequest(string Image, object Metadata);
 public record MintRequest(string To, string TokenURI, string TemplateId, string? PricePaid = null, object? PaymentProof = null);
 public record RelayRequest(string Signature, object Message);
+public record TempImageRequest(string Image);
 
 public class ApiResponse<T>
 {

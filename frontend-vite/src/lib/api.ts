@@ -48,6 +48,14 @@ export interface Template {
   preview: string;
 }
 
+export interface TempImageRequest {
+  image: string;
+}
+
+export interface TempImageResponse {
+  imageUrl: string;
+}
+
 export const apiClient = {
   async pinToIPFS(request: PinRequest): Promise<PinResponse> {
     const response = await api.post('/api/pin', request);
@@ -66,6 +74,11 @@ export const apiClient = {
 
   async getTemplates(): Promise<Template[]> {
     const response = await api.get('/api/templates');
+    return response.data.data;
+  },
+
+  async uploadTempImage(request: TempImageRequest): Promise<TempImageResponse> {
+    const response = await api.post('/api/upload-temp-image', request);
     return response.data.data;
   },
 };
