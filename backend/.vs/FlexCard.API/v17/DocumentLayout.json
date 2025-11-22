@@ -3,32 +3,104 @@
   "WorkspaceRootPath": "C:\\Personal\\Base\\base-farcaster\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7937B819-84BA-6013-585C-B34FFD594B65}|FlexCard.API.csproj|c:\\personal\\base\\base-farcaster\\backend\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7937B819-84BA-6013-585C-B34FFD594B65}|FlexCard.API.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{7937B819-84BA-6013-585C-B34FFD594B65}|FlexCard.API.csproj|c:\\personal\\base\\base-farcaster\\backend\\services\\iblockchainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7937B819-84BA-6013-585C-B34FFD594B65}|FlexCard.API.csproj|solutionrelative:services\\iblockchainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7937B819-84BA-6013-585C-B34FFD594B65}|FlexCard.API.csproj|c:\\personal\\base\\base-farcaster\\backend\\models\\flexcardmintedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7937B819-84BA-6013-585C-B34FFD594B65}|FlexCard.API.csproj|solutionrelative:models\\flexcardmintedevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7937B819-84BA-6013-585C-B34FFD594B65}|FlexCard.API.csproj|c:\\personal\\base\\base-farcaster\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7937B819-84BA-6013-585C-B34FFD594B65}|FlexCard.API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7937B819-84BA-6013-585C-B34FFD594B65}|FlexCard.API.csproj|c:\\personal\\base\\base-farcaster\\backend\\services\\statsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7937B819-84BA-6013-585C-B34FFD594B65}|FlexCard.API.csproj|solutionrelative:services\\statsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 0,
+      "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 38,
-          "SelectedChildIndex": 0,
+          "DockedHeight": 362,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\Personal\\Base\\base-farcaster\\backend\\Dockerfile",
-              "RelativeDocumentMoniker": "Dockerfile",
-              "ToolTip": "C:\\Personal\\Base\\base-farcaster\\backend\\Dockerfile",
-              "RelativeToolTip": "Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAABmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-11-19T17:44:42.991Z",
+              "DocumentIndex": 1,
+              "Title": "FlexCardMintedEvent.cs",
+              "DocumentMoniker": "C:\\Personal\\Base\\base-farcaster\\backend\\Models\\FlexCardMintedEvent.cs",
+              "RelativeDocumentMoniker": "Models\\FlexCardMintedEvent.cs",
+              "ToolTip": "C:\\Personal\\Base\\base-farcaster\\backend\\Models\\FlexCardMintedEvent.cs",
+              "RelativeToolTip": "Models\\FlexCardMintedEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T09:00:01.69Z",
               "EditorCaption": ""
             },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StatsService.cs",
+              "DocumentMoniker": "C:\\Personal\\Base\\base-farcaster\\backend\\Services\\StatsService.cs",
+              "RelativeDocumentMoniker": "Services\\StatsService.cs",
+              "ToolTip": "C:\\Personal\\Base\\base-farcaster\\backend\\Services\\StatsService.cs",
+              "RelativeToolTip": "Services\\StatsService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-22T08:46:45.695Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IBlockchainService.cs",
+              "DocumentMoniker": "C:\\Personal\\Base\\base-farcaster\\backend\\Services\\IBlockchainService.cs",
+              "RelativeDocumentMoniker": "Services\\IBlockchainService.cs",
+              "ToolTip": "C:\\Personal\\Base\\base-farcaster\\backend\\Services\\IBlockchainService.cs",
+              "RelativeToolTip": "Services\\IBlockchainService.cs",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAcwJcAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T15:47:29.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Personal\\Base\\base-farcaster\\backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Personal\\Base\\base-farcaster\\backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAowIgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T15:44:58.367Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AgIAAAcVAAAAAAAAAAAqwBIVAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-11-21T15:46:04.663Z"
+            }
+          ]
+        },
+        {
+          "DockedHeight": 55,
+          "SelectedChildIndex": -1,
+          "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
